@@ -1,4 +1,4 @@
-import initialState from "./initialState";
+import initialState from "./../store/initialState";
 // strings of the actions
 import { FETCH_FEED_ITEMS, RECEIVE_FEED_ITEMS } from "../actions/actionTypes";
 

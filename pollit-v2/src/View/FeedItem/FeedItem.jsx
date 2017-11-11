@@ -1,53 +1,18 @@
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+// React imports
 import PropTypes from "prop-types";
 import React from "react";
 
-import * as feedActions from "Model/actions/feedActions";
+// View imports
+import FeedItemChart from "View/FeedItemChart/FeedItemChart";
 
-class Feed extends React.Component {
-  componentWillMount() {
-    this.props.feedActions.fetchFeedItems();
-  }
+const FeedItem = ({ text, score, itemID }) =>
+  <div>
+    <FeedItemChart score={score} />
+    <span>{text}</span>;
+  </div>;
 
-  renderData = () => {
-    return (
-      <div>
-        {this.props.feedItems.map((e, i) =>
-          <div key={i}>
-            {e}
-          </div>
-        )}
-      </div>
-    );
-  };
-
-  render() {
-    return (
-      <div>
-        {this.props.feedItems.length > 0
-          ? this.renderData()
-          : <div>No Data</div>}
-      </div>
-    );
-  }
-}
-
-Feed.propTypes = {
-  feedActions: PropTypes.object,
+FeedItem.propTypes = {
   feedItems: PropTypes.array
 };
 
-function mapStateToProps(state) {
-  return {
-    feedItems: state.feedItems
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    feedActions: bindActionCreators(feedActions, dispatch)
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Feed);
+export default FeedItem;

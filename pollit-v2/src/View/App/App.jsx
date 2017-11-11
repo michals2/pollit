@@ -1,9 +1,9 @@
 import React from "react";
-import Feed from "View/Feed/Feed";
+import VisibleFeed from "Controller/VisibleFeed";
 
 const App = () =>
-  <div className="app">
-    <Feed />
+  <div>
+    <VisibleFeed />
   </div>;
 
 export default App;

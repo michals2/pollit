@@ -1,13 +1,13 @@
 import * as types from "./actionTypes";
 
-const url = "https://jsonplaceholder.typicode.com/posts";
-const url2 = "http://www.reddit.com/r/politics.json";
+const url = "http://www.reddit.com/r/politics.json";
 
 /**
  * @param {json} json - json string of data
  * @returns {object} - object blah blah
  */
 export function receiveFeedItems(json) {
+  console.log({json});
   return { type: types.RECEIVE_FEED_ITEMS, data: json };
 }
 
@@ -16,7 +16,7 @@ export function receiveFeedItems(json) {
  */
 export function fetchFeedItems() {
   return dispatch => {
-    return fetch(url2, {
+    return fetch(url, {
       method: "GET"
     })
       .then(response => {
@@ -25,7 +25,15 @@ export function fetchFeedItems() {
       .then(json => {
         console.log(json);
         return dispatch(
-          receiveFeedItems(json.data.children.map(i => i.data.title))
+          receiveFeedItems(
+            json.data.children.map(i => {
+              return {
+                text: i.data.title,
+                scoreX: Math.random(),
+                scoreY: Math.random()
+              };
+            })
+          )
         );
       });
   };
